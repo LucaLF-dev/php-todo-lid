@@ -11,15 +11,30 @@ const { createApp } = Vue
     },
     methods: {
       fetchData() {
-        axios.get('js/json.php').then(res => {
-            console.log(res.data.results);
+        axios.get('js/server.php').then(res => {
             this.todos = res.data.results
 
 
         })
-      }
+      },
+      storeTodo() {
+        const data = {
+          todo: this.newTodo,
+        }
+  
+        axios
+          .post('js/server.php', data, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          })
+          .then((res) => {
+            this.todos = res.data.results;
+            this.newTodo= '';
+          })
+      },
     },
     created() {
-        this.fetchData();
+      this.fetchData();
     }
   }).mount('#app')
