@@ -1,6 +1,6 @@
 <?php
 
-include __DIR__ . '/db.php';
+include __DIR__ . '/../db.php';
 
 $response = [
     'success' => true,
